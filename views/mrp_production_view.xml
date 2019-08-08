@@ -1,0 +1,228 @@
+<odoo>
+    <data>
+
+        <record id="sm_mrp_production_form_view_inherit" model="ir.ui.view">
+            <field name="name">sm_mrp_production_form_view_inherit</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field eval="18" name="priority"/>
+            <field name="arch" type="xml">
+                <field name="date_planned_start" position="replace"/>
+                <field name="date_planned_finished" position="replace"/>
+                <field name="location_src_id" position="replace" />
+                <field name="location_dest_id" position="replace" />
+
+                <xpath expr="//field[@name='bom_id']" position="before">
+                    <field name="date_planned_start"/>
+                    <field name="create_date" />
+                    <field name="date_planned_finished" invisible="1"/>
+                    <field name="product_image_medium" widget="image" class="oe_avatar" string="Product Image" />
+                    <field name="barcode" />
+                    <field name="sw_produce_location" />
+                    <field name="location_src_id" domain="[('usage','=','internal')]" attrs="{'readonly': [('has_moves', '=', True)]}"/>
+                    <field name="location_dest_id" domain="[('usage','=','internal')]" attrs="{'readonly': [('has_moves', '=', True)]}"/>
+                </xpath>
+
+                <field name="bom_id" position="replace" />
+                <field name="routing_id" position="replace" />
+
+                <field name="user_id" position="before">
+                    <field name="bom_id" domain="['&amp;', '|', ('product_id','=',product_id),
+                                            '&amp;', ('product_tmpl_id.product_variant_ids','=',product_id), ('product_id','=',False),
+                                                ('type', '=', 'normal')]" context="{'default_product_tmpl_id': product_tmpl_id}" required="1" attrs="{'readonly': [('has_moves', '=', True)]}"/>
+                    <field name="routing_id" groups="mrp.group_mrp_routings"/>
+                </field>
+
+                <field name="routing_id" position="after">
+                    <field name="sale_order_id" />
+                    <field name="sale_partner_id" />
+                    <field name="sale_user_id" />
+                    <field name="sale_expected_date" string="Exp. Ship Date" />
+                    <field name="purchase_order_id" />
+                </field>
+                <field name="origin" position="after">
+                    <field name="note" string="Notes" />
+                </field>
+
+                <xpath expr="//notebook" position="inside">
+                    <page string="Product Spesification" name="product_specs">
+						<group string="Extra Product Image">
+							<label for="product_image_detail_1" string="Extra Image" />
+							<div class="address_format">
+								<field name="product_image_detail_1" widget="image" style="width: 20%;padding:5px;" />
+								<field name="product_image_detail_2" widget="image" style="width: 20%;padding:5px;" nolabel="1" />
+								<field name="product_image_detail_3" widget="image" style="width: 20%;padding:5px;" nolabel="1" />
+								<field name="product_image_detail_4" widget="image" style="width: 20%;padding:5px;" nolabel="1" />
+								<field name="product_image_detail_5" widget="image" style="width: 20%;padding:5px;" nolabel="1" />
+							</div>
+						</group>
+
+						<group string="Weight &#38; Size">
+							<group>
+								<label for="sm_weight"/>
+								<div class="o_row" name="weight">
+									<field name="sm_weight"/>
+									<span>g</span>
+								</div>
+
+								<label for="skin_weight"/>
+								<div class="o_row" name="weight">
+									<field name="skin_weight"/>
+									<span>g</span>
+								</div>
+
+								<label for="cotton_weight"/>
+								<div class="o_row" name="weight">
+									<field name="cotton_weight"/>
+									<span>g</span>
+								</div>
+
+								<label for="sponge_weight"/>
+								<div class="o_row" name="weight">
+									<field name="sponge_weight"/>
+									<span>g</span>
+								</div>
+
+								<label for="bean_bag_weight"/>
+								<div class="o_row" name="weight">
+									<field name="bean_bag_weight"/>
+									<span>g</span>
+								</div>
+
+								<label for="etc_weight"/>
+								<div class="o_row" name="weight">
+									<field name="etc_weight"/>
+									<span>g</span>
+								</div>
+
+								<label for="sm_size"/>
+								<div class="o_row" name="weight">
+									<field name="sm_size"/>
+									<span>cm</span>
+								</div>
+							</group>
+
+							<group>
+							</group>
+
+						</group>
+
+						<group string="Sewing &#38; Finishing">
+							<label for="product_specs_image_1" string="Product Spec" />
+							<div class="address_format">
+								<field name="product_specs_image_1" widget="image" style="width: 20%;padding:5px;" />
+								<field name="product_specs_image_2" widget="image" style="width: 20%;padding:5px;" nolabel="1" />
+								<field name="product_specs_image_3" widget="image" style="width: 20%;padding:5px;" nolabel="1" />
+							</div>
+						</group>
+
+						<group string="Label &#38; H/T">
+							<field name="label_no" />
+
+							<label for="label_image_1" string="Label" />
+							<div class="address_format">
+								<field name="label_image_1" widget="image" style="width: 20%;padding:5px;" />
+								<field name="label_image_2" widget="image" style="width: 20%;padding:5px;" nolabel="1" />
+								<field name="label_image_3" widget="image" style="width: 20%;padding:5px;" nolabel="1" />
+								<field name="label_image_4" widget="image" style="width: 20%;padding:5px;" nolabel="1" />
+								<field name="label_image_5" widget="image" style="width: 20%;padding:5px;" nolabel="1" />
+							</div>
+
+							<label for="ht_image_1" string="H/T" />
+							<div class="address_format">
+								<field name="ht_image_1" widget="image" style="width: 20%;padding:5px;" />
+								<field name="ht_image_2" widget="image" style="width: 20%;padding:5px;" nolabel="1" />
+								<field name="ht_image_3" widget="image" style="width: 20%;padding:5px;" nolabel="1" />
+								<field name="ht_image_4" widget="image" style="width: 20%;padding:5px;" nolabel="1" />
+								<field name="ht_image_5" widget="image" style="width: 20%;padding:5px;" nolabel="1" />
+							</div>
+						</group>
+
+						<group string="Packing">
+							<group>
+								<label for="ctn_size"/>
+								<div class="o_row" name="weight">
+									<field name="ctn_size"/>
+									<span>cm</span>
+								</div>
+
+								<label for="qty_per_carton"/>
+								<div class="o_row" name="weight">
+									<field name="qty_per_carton" />
+									<span>Pcs/Ctn</span>
+								</div>
+
+								<field name="carton_quality" />
+								<field name="carton_weight" />
+								<field name="carton_color" />
+								<field name="qty_per_inner" />
+								<field name="inner_size" />
+								<field name="code_inner"/>
+								<field name="code_master" />
+								<field name="carton_marking" />
+
+							</group>
+							
+							<group col="2" >
+								<label for="pallet_width" string="Pallet Size" />
+								<div class="address_format">
+									<field name="pallet_width" style="width: 20%;" />
+									<span>cm </span>x
+									<field name="pallet_length" style="width: 20%;" />
+									<span>cm </span>x
+									<field name="pallet_height" style="width: 20%;" />
+									<span>cm</span>
+								</div>								
+
+								<span colspan="2" >* if you want to calculate CBM automatically in Sales Order, you have to enter CTN/Pallet information here.</span>
+								<label for="qty_carton_per_pallet"/>
+								<div class="o_row" name="weight">
+									<field name="qty_carton_per_pallet" />
+									<span>Ctn</span>
+								</div>
+
+								<label for="qty_item_per_pallet"/>
+								<div class="o_row" name="weight">
+									<field name="qty_item_per_pallet" />
+									<span>Pcs</span>
+								</div>
+
+								<field name="pallet_quality" />
+								<field name="pallet_weight" />
+								<field name="pallet_color" />
+								<field name="pallet_feet_pattern" widget="image" style="width: 50%;" />
+							</group>
+						</group>
+
+						<group>
+							<label for="etc_image_1" string="ETC" />
+							<div class="address_format">
+								<field name="etc_image_1" widget="image" style="width: 20%;padding:5px;" />
+								<field name="etc_image_2" widget="image" style="width: 20%;padding:5px;" nolabel="1" />
+								<field name="etc_image_3" widget="image" style="width: 20%;padding:5px;" nolabel="1" />
+								<field name="etc_image_4" widget="image" style="width: 20%;padding:5px;" nolabel="1" />
+								<field name="etc_image_5" widget="image" style="width: 20%;padding:5px;" nolabel="1" />
+								<field name="etc_image_6" widget="image" style="width: 20%;padding:5px;" nolabel="1" />
+							</div>
+						</group>
+
+						<group string="Barcode &#38; Sticker">
+							<!-- <label for="barcode_sticker_image_1" string="Barcode &#38; Sticker" /> -->
+							<div class="address_format">
+								<field name="barcode_sticker_image_1" widget="image" style="width: 20%;padding:5px;" nolabel="1" />
+								<field name="barcode_sticker_image_2" widget="image" style="width: 20%;padding:5px;" nolabel="1" />
+								<field name="barcode_sticker_image_3" widget="image" style="width: 20%;padding:5px;" nolabel="1" />
+								<field name="barcode_sticker_image_4" widget="image" style="width: 20%;padding:5px;" nolabel="1" />
+								<field name="barcode_sticker_image_5" widget="image" style="width: 20%;padding:5px;" nolabel="1" />
+								<field name="barcode_sticker_image_6" widget="image" style="width: 20%;padding:5px;" nolabel="1" />
+							</div>
+						</group>
+
+
+					</page>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
