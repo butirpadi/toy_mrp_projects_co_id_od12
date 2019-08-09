@@ -24,8 +24,10 @@
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
+        'views/res_company_view.xml',
         'views/product_template.xml',
         'views/mrp_production_view.xml',
+        'reports/manufacturing_order_report.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
