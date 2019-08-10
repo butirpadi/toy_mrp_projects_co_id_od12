@@ -22,7 +22,7 @@
         <t t-foreach="docs" t-as="doc">
             <t t-call="web.basic_layout">
                 <div class="header">
-                    <img t-att-src="image_data_uri(user.company_id.sw_report_header)" style="width:100%;" />
+                    <img t-if="user.company_id.sw_report_header" t-att-src="image_data_uri(user.company_id.sw_report_header)" style="width:100%;" />
                 </div>
                 <div class="page" style="font-size:10pt!important;">
                     <style type="text/css">
