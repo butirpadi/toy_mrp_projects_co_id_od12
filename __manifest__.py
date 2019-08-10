@@ -19,7 +19,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'sale_management', 'purchase', 'mrp'],
+    'depends': ['base', 'sale_management', 'purchase', 'mrp', 'field_ukuran_product', 'field_additional_sale_order'],
 
     # always loaded
     'data': [
@@ -27,6 +27,7 @@
         'views/res_company_view.xml',
         'views/product_template.xml',
         'views/mrp_production_view.xml',
+        'views/mrp_bom_view.xml',
         'reports/manufacturing_order_report.xml',
     ],
     # only loaded in demonstration mode

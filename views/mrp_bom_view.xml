@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <record id="sw_mrp_bom_form_view_inherit" model="ir.ui.view">
+            <field name="name">sw_mrp_bom_form_view_inherit</field>
+            <field name="model">mrp.bom</field>
+            <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
+			<field eval="18" name="priority"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='bom_line_ids']/tree/field[@name='product_uom_id']" position="after">
+                    <field name="sw_remark" />
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+
+</odoo>

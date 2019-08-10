@@ -18,6 +18,8 @@
                     <field name="date_planned_finished" invisible="1"/>
                     <field name="product_image_medium" widget="image" class="oe_avatar" string="Product Image" />
                     <field name="barcode" />
+                    <field name="prod_label" />
+                    <field name="prod_ht" />
                     <field name="sw_produce_location" />
                     <field name="location_src_id" domain="[('usage','=','internal')]" attrs="{'readonly': [('has_moves', '=', True)]}"/>
                     <field name="location_dest_id" domain="[('usage','=','internal')]" attrs="{'readonly': [('has_moves', '=', True)]}"/>
@@ -37,11 +39,13 @@
                     <field name="sale_order_id" />
                     <field name="sale_partner_id" />
                     <field name="sale_user_id" />
+                    <field name="sw_so_no" string="SW SO No." />
                     <field name="sale_expected_date" string="Exp. Ship Date" />
                     <field name="purchase_order_id" />
                 </field>
                 <field name="origin" position="after">
-                    <field name="note" string="Notes" />
+                    <field name="special_intruction" string="Special Instruction" />
+                    <field name="so_notes" string="Notes" />
                 </field>
 
                 <xpath expr="//notebook" position="inside">

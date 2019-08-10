@@ -14,6 +14,7 @@ class stock_picking(models.Model):
     )
     customer_product_code = fields.Char(string=u'Customer Product Code')
     pattern = fields.Char('Pattern')
+    sw_rak = fields.Char('RAK')
 
     # genral information tab
     product_image_detail_1 = fields.Binary("Extra Image")
